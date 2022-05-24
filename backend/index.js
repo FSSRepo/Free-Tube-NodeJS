@@ -36,19 +36,22 @@ function readDatabase(callback) {
 }
 
 app.post("/upload",(req,res) => {
+	if(fs.existsSync('./uploads') == false){
+		fs.mkdirSync('./uploads');
+	}
     let fr = formidable({
-        uploadDir: './videos',
+        uploadDir: './uploads',
         keepExtensions: true,
         maxFileSize: 1024 * 1024 * 1024
     });
     fr.parse(req, function(err, fields, files) {
         let id = uuid();
-        fs.rename('./videos/'+files.video.newFilename, './videos/'+id+".mp4", function(err) {
+        fs.rename('./uploads/'+files.video.newFilename, './videos/'+id+".mp4", function(err) {
         if (err)
             throw err;
         });
         readDatabase((videos) => {
-            videos.push({id,name:""});
+            videos.push({id,name: ""});
             writeDatabase(videos,() => {
                 res.status(200).send({id});
             });
