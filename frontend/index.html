@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Fast Extension</title>
+        <script src="libs/jquery-3.6.0.min.js"></script>
+        <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+        />
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <style>
+            .video-item {
+                text-align: left;
+            }
+        </style>
+        <div class="container">
+            <h4 id="title">Free Tube</h4>
+            <div class="row">
+                <div class="col s7">
+                    <video id="videoplayer" width="640" height="360" controls>
+                    </video>
+                </div>
+                <div class="card col s5" >
+                    <div class="card-content">
+                        <span class="card-title">Subir video</span>
+                        <a class="waves-effect waves-light btn" id="choose"><i class="material-icons left">file_open</i> Escoger</a>
+                        <div class="input-field" id="nv">
+                            <input id="name" type="search" autocomplete="off"/>
+                            <label for="name">Nombre del video</label>
+                        </div>
+                        <a class="waves-effect waves-light btn" id="upload"><i class="material-icons left">upload</i> Subir</a>
+                        <div id="prog-view">
+                            <div class="progress">
+                                <div class="determinate" id="prog-bar" style="width: 0%"></div>
+                            </div>
+                            <span class="right" id="prog-text">Subiendo: 0%</span>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Videos disponibles</span>
+                    <ul class="collection" id="list-videos"></ul>
+                </div>
+            </div>
+        </div>
+        <script src="libs/materialize.min.js"></script>
+        <script src="server.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
