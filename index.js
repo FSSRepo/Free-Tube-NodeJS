@@ -1,6 +1,6 @@
 // Setting Server Listener
 const port = 3000;
-//const host = "192.168.1.116";
+//const host = "192.168.1.21";
 const host = "localhost";
 
 const express = require('express');
@@ -13,8 +13,9 @@ const uuid = require('uuid').v4;
 const app = express();
 app.use(cors());
 app.use(body.urlencoded({extended:true, limit:'1024mb'}));
-app.use(body.json({limit:'1024mb'}));
+app.use(body.json({limit:'2048mb'}));
 app.use(express.static('public'));
+app.use("/vmob",express.static('uploads'));
 
 function writeDatabase(videos,callback) {
     fs.writeFile('./database.json', JSON.stringify({videos}), err => {

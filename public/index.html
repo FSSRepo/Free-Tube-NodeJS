@@ -17,37 +17,62 @@
         <style>
             .video-item {
                 text-align: left;
+
+            }
+            .title {
+                font-size: 50px;
+                font-weight: 500;
+            }
+            .video-title {
+                font-size: 30px;
+                font-weight: 400;
             }
         </style>
         <div class="container">
-            <h4 id="title">Free Tube</h4>
+            <div id="upload-modal" class="modal">
+                <div class="modal-content row">
+                  <h4>Subir</h4>
+                  <a class="waves-effect waves-light btn" id="choose"><i class="material-icons left">file_open</i> Escoger</a>
+                <div class="input-field" id="nv">
+                    <input id="name" type="search" autocomplete="off"/>
+                            <label for="name">Nombre del video</label>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-close waves-effect waves-blue btn-flat"><i
+                      class="material-icons left">cancel</i>Cancelar</a>
+                  <a href="#!" id="upload" class="modal-close waves-effect waves-blue btn-flat"><i
+                      class="material-icons left">upload</i>Subir</a>
+                </div>
+              </div>
+            <div>
+                <div id="uploading-modal" class="modal">
+                    <div class="modal-content row">
+                         <h4>Subiendo</h4>
+                        <span class="right" id="prog-text">0%</span>
+                        <div class="progress">
+                            <div class="determinate" id="prog-bar" style="width: 0%"></div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            <div>
+                <span class="title">Free Tube</h>
+                <a class="waves-effect waves-light btn right" id="upload-btn" style="margin-top: 20px;"><i class="material-icons left">upload</i>Subir video</a>
+            </div>
             <div class="row">
                 <video id="videoplayer" class="col s12 l7 m12" style="margin-top: 10px;" controls>
                 </video>
                 <div class="card col s12 l5 m12" >
                     <div class="card-content">
-                        <span class="card-title">Subir video</span>
-                        <a class="waves-effect waves-light btn" id="choose"><i class="material-icons left">file_open</i> Escoger</a>
-                        <div class="input-field" id="nv">
-                            <input id="name" type="search" autocomplete="off"/>
-                            <label for="name">Nombre del video</label>
-                        </div>
-                        <a class="waves-effect waves-light btn" id="upload"><i class="material-icons left">upload</i> Subir</a>
-                        <div id="prog-view">
-                            <div class="progress">
-                                <div class="determinate" id="prog-bar" style="width: 0%"></div>
-                            </div>
-                            <span class="right" id="prog-text">Subiendo: 0%</span>
-                            <br/>
-                        </div>
+                        <span class="card-title">Videos disponibles</span>
+                        <div class="collection" id="list-videos"></d>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Videos disponibles</span>
-                    <ul class="collection" id="list-videos"></ul>
-                </div>
+            </div>
+            <div>
+                <span class="video-title" id="video-title">Video</span>
             </div>
         </div>
         <script src="libs/materialize.min.js"></script>
