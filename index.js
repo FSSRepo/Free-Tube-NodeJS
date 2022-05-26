@@ -1,3 +1,8 @@
+// Setting Server Listener
+const port = 3000;
+//const host = "192.168.1.116";
+const host = "localhost";
+
 const express = require('express');
 const body = require('body-parser');
 const cors = require('cors');
@@ -35,8 +40,6 @@ function readDatabase(callback) {
       }
     });
 }
-
-
 
 app.post("/upload",(req,res) => {
 	if(fs.existsSync('./uploads') == false){
@@ -105,6 +108,6 @@ app.get("/video/:id",(req,res) => {
     videoStream.pipe(res);
 });
 
-app.listen(3000,"192.168.1.116",() => {
-    console.log("Listening on port 3000");
+app.listen(port,host,() => {
+    console.log("Server running\nEndpoint: http://"+host+":"+port);
 });
