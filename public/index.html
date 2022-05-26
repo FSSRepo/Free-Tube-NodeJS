@@ -1,75 +1,76 @@
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Free Tube</title>
-        <script src="libs/jquery-3.6.0.min.js"></script>
-        <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-        />
-        <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-    <body>
-        <style>
-            .video-item {
-                text-align: left;
 
-            }
-            .title {
-                font-size: 50px;
-                font-weight: 500;
-            }
-            .video-title {
-                font-size: 30px;
-                font-weight: 400;
-            }
-        </style>
-        <div class="container">
-            <div id="upload-modal" class="modal">
-                <div class="modal-content row">
-                  <h4>Subir</h4>
-                  <a class="waves-effect waves-light btn" id="choose"><i class="material-icons left">file_open</i> Escoger</a>
+<head>
+    <meta charset="UTF-8" />
+    <title>Free Tube</title>
+    <script src="libs/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <style>
+        .video-item {
+            text-align: left;
+
+        }
+
+        .title {
+            font-size: 50px;
+            font-weight: 500;
+        }
+
+        .video-title {
+            font-size: 30px;
+            font-weight: 400;
+        }
+    </style>
+    <div class="container">
+        <div id="upload-modal" class="modal">
+            <div class="modal-content row">
+                <h4>Subir</h4>
+                <a class="waves-effect waves-light btn" id="choose"><i class="material-icons left">file_open</i>
+                    Escoger</a>
                 <div class="input-field" id="nv" style="visibility: hidden;">
-                    <input id="name" type="search" autocomplete="off"/>
-                            <label for="name">Nombre del video</label>
-                        </div>
+                    <input id="name" type="search" autocomplete="off" />
+                    <label for="name">Nombre del video</label>
                 </div>
-                <div class="modal-footer">
-                  <a href="#!" class="modal-close waves-effect waves-blue btn-flat"><i
-                      class="material-icons left">cancel</i>Cancelar</a>
-                  <a href="#!" id="upload" style="display: none;" class="modal-close waves-effect waves-blue btn-flat"><i
-                      class="material-icons left">upload</i>Subir</a>
-                </div>
-              </div>
-            <div>
-                <div id="uploading-modal" class="modal">
-                    <div class="modal-content row">
-                         <h4>Subiendo</h4>
-                        <span class="right" id="prog-text">0%</span>
-                        <div class="progress">
-                            <div class="determinate" id="prog-bar" style="width: 0%"></div>
-                        </div>
-                        <br />
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-blue btn-flat"><i
+                        class="material-icons left">cancel</i>Cancelar</a>
+                <a href="#!" id="upload" style="display: none;" class="modal-close waves-effect waves-blue btn-flat"><i
+                        class="material-icons left">upload</i>Subir</a>
+            </div>
+        </div>
+        <div>
+            <div id="uploading-modal" class="modal">
+                <div class="modal-content row">
+                    <h4>Subiendo</h4>
+                    <span class="right" id="prog-text">0%</span>
+                    <div class="progress">
+                        <div class="determinate" id="prog-bar" style="width: 0%"></div>
                     </div>
+                    <br />
                 </div>
+            </div>
             <div>
                 <span class="title">Free Tube</h>
-                <a class="waves-effect waves-light btn right" id="upload-btn" style="margin-top: 20px;"><i class="material-icons left">upload</i>Subir video</a>
+                    <a class="waves-effect waves-light btn right" id="upload-btn" style="margin-top: 20px;"><i
+                            class="material-icons left">upload</i>Subir video</a>
             </div>
             <div class="row">
                 <video id="videoplayer" class="col s12 l7 m12" style="margin-top: 10px;" controls>
                 </video>
-                <div class="card col s12 l5 m12" >
+                <div class="card col s12 l5 m12">
                     <div class="card-content">
                         <span class="card-title">Videos disponibles</span>
-                        <div class="collection" id="list-videos"></d>
+                        <div class="collection" id="list-videos">
+                            </d>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div>
                 <span class="video-title" id="video-title">Video</span>
@@ -78,5 +79,6 @@
         <script src="libs/materialize.min.js"></script>
         <script src="server.js"></script>
         <script src="main.js"></script>
-    </body>
+</body>
+
 </html>
