@@ -22,9 +22,6 @@ $(() => {
     $("#choose").click(() => {
         file_choose.click();
     });
-    $("#nv").css({visibility:"hidden"});
-    $("#upload").css({display:"none"});
-    $("#prog-view").css({visibility:"hidden"});
     file_choose.addEventListener("change",(e) => {
         $("#nv").css({visibility:"visible"});
         $("#upload").css({display:"inline-block"});
@@ -51,13 +48,21 @@ $(() => {
                 get("video-list","",(res) => {
                     updateVideoList(res);
                     $("#uploading-modal").modal("close");
+                    $("#nv").css({visibility:"hidden"});
+                    $("#upload").css({display:"none"});
                 },()=>{});
                 
             },()=>{});
         });
     });
-    $("#upload-modal").modal();
-    $("#uploading-modal").modal();
+    $("#upload-modal").modal(
+        {
+            dismissible:false
+    }
+    );
+    $("#uploading-modal").modal({
+        dismissible:false
+    });
     $("#upload-btn").click(() => {
         $("#upload-modal").modal("open");
     });
