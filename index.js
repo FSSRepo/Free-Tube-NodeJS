@@ -1,6 +1,6 @@
 // Setting Server Listener
 const port = 3000;
-//const host = "192.168.1.21";
+//const host = "192.168.100.7";
 const host = "localhost";
 
 const express = require('express');
@@ -8,9 +8,24 @@ const body = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const formidable = require('formidable');
+const http = require('http');
+const {Server} = require('socket.io');
 const uuid = require('uuid').v4;
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection',socket => {
+    console.log("User Connected: "+socket.id);
+    socket.on('disconnect', reason => {
+        console.log("User Disconnected: "+ socket.id);
+    });
+    socket.on('req-update-videolist',msg => {
+        socket.broadcast.emit('update-videolist');
+    });
+});
+
 app.use(cors());
 app.use(body.urlencoded({extended:true, limit:'1024mb'}));
 app.use(body.json({limit:'2048mb'}));
@@ -109,6 +124,6 @@ app.get("/video/:id",(req,res) => {
     videoStream.pipe(res);
 });
 
-app.listen(port,host,() => {
+server.listen(port,host,() => {
     console.log("Server running\nEndpoint: http://"+host+":"+port);
 });

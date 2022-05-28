@@ -16,6 +16,21 @@ function updateVideoList(res) {
 }
 
 $(() => {
+    
+const socket = io();
+
+socket.on("update-videolist", (msg) => {
+    M.toast({html:'Nuevo video'});
+  get(
+    "video-list",
+    "",
+    (res) => {
+      updateVideoList(res);
+    },
+    () => {}
+  );
+});
+
     let file_choose = document.createElement("input");
     file_choose.type = "file";
     file_choose.accept = "video/mp4";
@@ -50,8 +65,8 @@ $(() => {
                     $("#uploading-modal").modal("close");
                     $("#nv").css({visibility:"hidden"});
                     $("#upload").css({display:"none"});
-                },()=>{});
-                
+                },() => {});
+                socket.emit('req-update-videolist');
             },()=>{});
         });
     });
