@@ -1,7 +1,7 @@
 // Setting Server Listener
 const port = 3000;
-//const host = "192.168.100.7";
-const host = "localhost";
+const host = "192.168.100.7";
+//const host = "localhost";
 
 const express = require('express');
 const body = require('body-parser');
