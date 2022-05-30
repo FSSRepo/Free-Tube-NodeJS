@@ -1,0 +1,23 @@
+.video-item {
+    text-align: left;
+
+}
+
+.title {
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.video-title {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.video-item img {
+    padding: 0 !important; 
+}
+
+.video-item span {
+    color: black;
+    font-weight: 390;
+}
