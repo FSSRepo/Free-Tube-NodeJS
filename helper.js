@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from 'fs';
 
 const readFile = (path, opts = 'utf8') =>
   new Promise((resolve, reject) => {
@@ -15,16 +15,14 @@ const writeFile = (path, data, opts = 'utf8') =>
       else resolve()
     })
   })
-
-module.exports = {
-    beginVideos: async () => {
+const beginVideos = async () => {
     if(fs.existsSync('./database.json') === false){
         fs.writeFileSync('./database.json',JSON.stringify({videos:[]}));
     }
     let result = await readFile('./database.json');
     return JSON.parse(result).videos;
-    },
-    endVideos:  async (videos) => {
+    }
+const endVideos =  async (videos) => {
         await writeFile('./database.json',JSON.stringify({videos}));
     }
-}
+export {beginVideos,endVideos}

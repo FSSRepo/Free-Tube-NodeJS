@@ -3,12 +3,11 @@ const port = 3000;
 //const host = "192.168.100.7";
 const host = "localhost";
 
-const express = require('express');
-const body = require('body-parser');
-const cors = require('cors');
-const http = require('http');
-const routes = require('./routes/routes');
-const { setupRealtime } = require('./realtime');
+import express from 'express';
+import cors from 'cors';
+import http from 'http';
+import routes from './routes/routes.js';
+import { setupRealtime } from './realtime.js';
 
 const app = express();
 const server = http.createServer(app);
