@@ -2,13 +2,7 @@ import fs from "fs";
 import formidable from "formidable";
 import { beginVideos, endVideos } from "../helper.js";
 import { v4 as uuid } from "uuid";
-import { path as ffmpegPath } from "@ffmpeg-installer/ffmpeg";
-import { path as ffprobePath } from "@ffprobe-installer/ffprobe";
-import ffmpeg from "fluent-ffmpeg";
-import path from "path";
-
-ffmpeg.setFfmpegPath(ffmpegPath);
-ffmpeg.setFfprobePath(ffprobePath);
+import { exec } from "child_process";
 
 const UploadVideoFile = (form, req) =>
   new Promise((resolve, reject) => {
@@ -46,32 +40,21 @@ const processVideo = async (req, res) => {
     }
   });
   await endVideos(videos);
-  ffmpeg.ffprobe(
-    path.resolve("controller/", "../uploads/" + id + ".mp4"),
-    (err, data) => {
-      if (err) console.log(err);
-      let random_d = data.format.duration * Math.random();
-      let screenshot = "";
-      ffmpeg(path.resolve("controller/", "../uploads/" + id + ".mp4"))
-        .on("filenames", (file) => {
-          screenshot = file[0];
-        })
-        .on("end", () => {
-          fs.renameSync(
-            "./thumbnails/" + screenshot,
-            "./thumbnails/" + id + ".png"
-          );
-          res.status(200).send({});
-        })
-        .on("error", function (err) {
-          console.log("an error happened: " + err.message);
-        })
-        .takeScreenshots(
-          { count: 1, timemarks: [random_d.toString()], size: "640x360" },
-          path.resolve("controller/", "../thumbnails")
-        );
-    }
-  );
+  let time = (t) => { return t < 10 ? "0" + t : t; }
+  exec("ffmpeg -i ./uploads/" + id + ".mp4", (er, so, se) => {
+    let __dur = se.substring(se.indexOf("Duration: "));
+    __dur = __dur.substring(9, __dur.indexOf("."));
+    let dur_s = __dur.split(":");
+    let duration = parseInt(dur_s[0]) * 3600 + parseInt(dur_s[1] * 60) + parseInt(dur_s[2]);
+    let random_d = duration * Math.random();
+    let hour = random_d / 3600, minute = (random_d / 60) % 60, second = random_d % 60;
+    exec("ffmpeg -i ./uploads/" + id + ".mp4 -ss " +
+      time(Math.floor(hour)) + ":" +
+      time(Math.floor(minute)) +":" +
+      time(Math.floor(second)) + " -vframes 1 ./thumbnails/" + id + ".png", (err, stdout, stderr) => {
+      res.status(200).send({});
+    });
+  });
 };
 const getVideoList = async (req, res) => {
   res.status(200).send({ videos: await beginVideos() });
